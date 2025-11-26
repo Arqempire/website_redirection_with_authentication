@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f4f4;
+        }
+        header {
+            background: #b7b514;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h2 {
+            margin: 0;
+            flex-grow: 1;
+        }
+        .user-info {
+            font-size: 14px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+        nav {
+            background: #222;
+            padding: 10px;
+        }
+        nav a {
+            color: #ddd;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #fff;
+        }
+        .container {
+            padding: 20px;
+        }
+        .box {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .logout {
+            background: red;
+            padding: 8px 12px;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .logout:hover {
+            background: #c82333;
+        }
+        .course-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .course-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #b7b514;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .course-card h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+    </style>
+
+</head>
+<body>
+
+<header>
+    <h2>Student Dashboard</h2>
+    <div class="user-info">👤 <span id="userName"></span></div>
+</header>
+
+<nav>
+    <a href="student.html">Home</a>
+    <a href="#">View Notes</a>
+    <a href="#">Assignments</a>
+    <a href="#">Profile</a>
+</nav>
+
+<div class="container">
+    <div class="box">
+        <h3>Welcome, <span id="welcomeName"></span>! 🎓</h3>
+        <p>Access notes, assignments, and your profile here.</p>
+    </div>
+
+    <div class="box">
+        <h3>Your Courses</h3>
+        <div class="course-list">
+            <div class="course-card">
+                <h4>Mathematics</h4>
+                <p>Next class: Monday 10:00 AM</p>
+            </div>
+            <div class="course-card">
+                <h4>Physics</h4>
+                <p>Next class: Tuesday 2:00 PM</p>
+            </div>
+            <div class="course-card">
+                <h4>Chemistry</h4>
+                <p>Next class: Wednesday 11:00 AM</p>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <button class="logout" onclick="logout()">Logout</button>
+    </div>
+</div>
+
+<script>
+    // Check authentication
+    window.addEventListener('DOMContentLoaded', function() {
+        const role = sessionStorage.getItem('role');
+        const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+        const name = sessionStorage.getItem('name');
+        
+        if (!isLoggedIn || role !== 'student') {
+            window.location.href = 'index.html';
+        } else {
+            // Display user name
+            document.getElementById('userName').textContent = name;
+            document.getElementById('welcomeName').textContent = name;
+        }
+    });
+
+    function logout() {
+        sessionStorage.clear();
+        window.location.href = 'index.html';
+    }
+</script>
+
+</body>
+</html>

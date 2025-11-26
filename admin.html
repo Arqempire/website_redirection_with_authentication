@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f4f4;
+        }
+        header {
+            background: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h2 {
+            margin: 0;
+            flex-grow: 1;
+        }
+        .user-info {
+            font-size: 14px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+        nav {
+            background: #222;
+            padding: 10px;
+        }
+        nav a {
+            color: #ddd;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #fff;
+        }
+        .container {
+            padding: 20px;
+        }
+        .box {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .logout {
+            background: red;
+            padding: 8px 12px;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .logout:hover {
+            background: #c82333;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-card h3 {
+            margin: 0;
+            font-size: 32px;
+        }
+        .stat-card p {
+            margin: 5px 0 0 0;
+        }
+    </style>
+
+</head>
+<body>
+
+<header>
+    <h2>Admin Dashboard</h2>
+    <div class="user-info">👤 <span id="userName"></span></div>
+</header>
+
+<nav>
+    <a href="admin.html">Home</a>
+    <a href="#">Manage Users</a>
+    <a href="#">View Reports</a>
+    <a href="#">Settings</a>
+</nav>
+
+<div class="container">
+    <div class="box">
+        <h3>Welcome, <span id="welcomeName"></span>!</h3>
+        <p>You can manage system settings and users from here.</p>
+    </div>
+
+    <div class="stats">
+        <div class="stat-card">
+            <h3>150</h3>
+            <p>Total Students</p>
+        </div>
+        <div class="stat-card">
+            <h3>25</h3>
+            <p>Total Teachers</p>
+        </div>
+        <div class="stat-card">
+            <h3>12</h3>
+            <p>Active Courses</p>
+        </div>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <button class="logout" onclick="logout()">Logout</button>
+    </div>
+</div>
+
+<script>
+
+    window.addEventListener('DOMContentLoaded', function() {
+        const role = sessionStorage.getItem('role');
+        const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+        const name = sessionStorage.getItem('name');
+        
+        if (!isLoggedIn || role !== 'admin') {
+            window.location.href = 'index.html';
+        } else {
+        
+            document.getElementById('userName').textContent = name;
+            document.getElementById('welcomeName').textContent = name;
+        }
+    });
+
+    function logout() {
+        sessionStorage.clear();
+        window.location.href = 'index.html';
+    }
+</script>
+
+</body>
+</html>
